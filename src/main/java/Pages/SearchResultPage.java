@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SearchResultPage {
     private WebDriver driver;
-    private By nextPageLink = By.xpath("//a[contains(text(), 'Next')]");
+    private By nextPageLink = By.xpath("//a[@title='Next page']");
     private By searchResultItems = By.xpath("//li[@class='b_algo']");
 
     public SearchResultPage(WebDriver driver) {
@@ -23,8 +23,8 @@ public class SearchResultPage {
         return searchResults.size();
     }
     public void goToNextPage() {
-        driver.findElement(By.xpath("//a[contains(text(), 'Next')]")).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(nextPageLink));
+        driver.findElement(nextPageLink).click();
     }
 }
